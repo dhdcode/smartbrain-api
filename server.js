@@ -11,6 +11,8 @@ const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
+const PORT = process.env.PORT;
+
 const db = knex({
   client: 'pg',
   connection: {
@@ -33,7 +35,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
-  res.send(database.users);
+  res.send('it is working!');
 });
 
 app.post('/signin', signin.handleSignin(db, bcrypt));
@@ -54,6 +56,6 @@ app.post('/imageurl', (req, res) => {
   image.handleApiCall(req, res);
 });
 
-app.listen(process.event.PORT || 3000, () => {
+app.listen(PORT || 3000, () => {
   console.log(`app is running on port ${process.env.PORT}`);
 });
